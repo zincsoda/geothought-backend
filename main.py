@@ -1,7 +1,5 @@
-import json
-
 def handler(event, context):
-    data = { "geothoughts": [
+    data =[
         {
             "geohash": "cepwsg",
             "coords": "123,123",
@@ -12,9 +10,8 @@ def handler(event, context):
             "coords": "123,123",
             "message": "I walk here every weekend"
         }
-        ]
-    }
-    return json.dumps(data)
+    ]
+    return {"geothoughts": data}
 
 if __name__=="__main__":
   print handler(None, None)
