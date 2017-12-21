@@ -13,7 +13,6 @@ def handler(event, context):
         return "Error, no http_method available"
 
     if http_method == 'GET':
-        print "Getting thoughts ..."
         thoughts = geothoughts.get_all()
         return {"geothoughts": thoughts}
 
@@ -21,7 +20,6 @@ def handler(event, context):
         geohash = 'testing'
         coordinates = '1234'
         message = 'this is a test'
-        print "Saving thought ..."
         geothoughts.add(geohash, coordinates, message)
 
 if __name__=="__main__":
