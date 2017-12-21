@@ -1,12 +1,12 @@
 import unittest
 from sqlalchemy import create_engine
 from src.database_wrapper import DatabaseWrapper
-from src.database_wrapper import prepare_test_database
+from src.database_wrapper import setup_local_database_url
 from src.models import create_tables
 
 def setup_module():
     global db_wrapper 
-    db_url = prepare_test_database()    
+    db_url = setup_local_database_url()    
     db_wrapper = DatabaseWrapper(db_url)
 
 class TestDatabaseWrapper(unittest.TestCase):

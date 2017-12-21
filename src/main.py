@@ -1,6 +1,6 @@
 from src.geothoughts import Geothoughts
 from src.database_wrapper import DatabaseWrapper
-from src.database_wrapper import prepare_test_database
+from src.database_wrapper import setup_local_database_url
 import os
 from src.models import create_tables
 
@@ -21,7 +21,7 @@ def get_db_session(event):
         db_wrapper = DatabaseWrapper(pg_db_url)
     else:
         # We assume that the test database and tables are already created
-        test_db_url = prepare_test_database(reset=False)
+        test_db_url = setup_local_database_url(reset=False)
         db_wrapper = DatabaseWrapper(test_db_url)
 
     return db_wrapper.get_session()
@@ -30,32 +30,67 @@ def handler(event, context):
 
     print event
 
-    # TODO: Return correct errors
     session = get_db_session(event)
     if not session:
-        return "Error, no http_method available"
+        error_response = {
+            "status_code": '400',
+            "body": { "error": 'Unable to retrieve database session' },
+            "headers": {'Content-Type': 'application/json'}
+        }
+        return error_response
+    
     geothoughts = Geothoughts(session)
 
-    if 'method' in event:
-        http_method = event['method']
-    else:
-        return "Error, no http_method available"
+    if 'method' not in event:
+        print "No HTTP method present in request"
+        error_response = {
+            "status_code": '400',
+            "body": { "error": 'No HTTP method present in request' },
+            "headers": {'Content-Type': 'application/json'}
+        }
+        return error_response
+
+    http_method = event['method']
 
     if http_method == 'GET':
 
-        # TODO: Get thoughts for geohash
+        # TODO: Get thoughts for specific geohash
 
         thoughts = geothoughts.get_all()
-        return {"geothoughts": thoughts}
+        success_response = {
+            "status_code": '200',
+            "body": { "geothoughts": thoughts },
+            "headers": {'Content-Type': 'application/json'}
+        }
+        return success_response
 
     if http_method == 'POST':
 
-        try: 
+        try:
             geohash = event['body']['geohash']
             coordinates = event['body']['coordinates']
             message = event['body']['message']
         except Exception as e:
-            print "Error getting required parameters from body: ", e
-            return "500 Error creating a record"
-        else:
+            print "Error parsing request body: ", e
+            error_response = {
+                "status_code": '400',
+                "body": { "error": 'Invalid request body: %s' % e},
+                "headers": {'Content-Type': 'application/json'}
+            }
+            return error_response
+        try:
             geothoughts.add(geohash, coordinates, message)
+        except Exception as e:
+            print "Error parsing request body: ", e
+            error_response = {
+                "status_code": '400',
+                "body": { "error": 'Error saving data: %s' % e},
+                "headers": {'Content-Type': 'application/json'}
+            }
+            return error_response
+        
+        success_response = {
+            "status_code": '201',
+            "headers": {'Content-Type': 'application/json'}
+        }
+        return success_response

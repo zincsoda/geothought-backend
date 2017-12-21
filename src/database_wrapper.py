@@ -2,10 +2,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import os
 
-def prepare_test_database(reset=True):
+def setup_local_database_url(reset=True):
     sqlite_file = 'test.db'
     if reset:
         if os.path.isfile(sqlite_file):
+            print "\nRemoving file %s" % sqlite_file
             os.remove(sqlite_file)
     db_url = 'sqlite:///%s' % sqlite_file
     return db_url
