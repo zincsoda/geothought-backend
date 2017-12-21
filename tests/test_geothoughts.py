@@ -2,12 +2,12 @@ import unittest
 from src.database_wrapper import DatabaseWrapper
 from src.geothoughts import Geothoughts
 from src.models import Geothought
-from tests.test_database import prepare_new_test_database
+from src.database_wrapper import prepare_test_database
 from src.models import create_tables
 
 def setup_module():
 
-    test_db_url = prepare_new_test_database()
+    test_db_url = prepare_test_database()
     db_wrapper = DatabaseWrapper(test_db_url)
     db_engine = db_wrapper.get_db_engine()
     create_tables(db_engine)
