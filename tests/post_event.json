@@ -1,0 +1,30 @@
+{
+  "body": {
+    "message": "messageinabottle3",
+    "geohash": "test_hash",
+    "coordinates": "coordinates"
+  },
+  "headers": {
+    "Content-Type": "application/json",
+    "Via": "1.1c154e1d9f76106d9025a8ffb4f4831ae.cloudfront.net(CloudFront)",
+    "CloudFront-Is-Desktop-Viewer": "true",
+    "CloudFront-Is-SmartTV-Viewer": "false",
+    "CloudFront-Forwarded-Proto": "https",
+    "X-Forwarded-For": "1.64.80.192,54.239.129.48",
+    "CloudFront-Viewer-Country": "HK",
+    "Accept": "*/*",
+    "User-Agent": "insomnia/5.12.4",
+    "X-Amzn-Trace-Id": "Root=1-5a3b993c-75df50a13280d17579580191",
+    "Host": "413nf2l0af.execute-api.ap-northeast-1.amazonaws.com",
+    "X-Forwarded-Proto": "https",
+    "X-Amz-Cf-Id": "Mmo3kq8ngNo4cQIsm4xTRZ5ijEIdPIhm3xnKPi1yvzCaNr7d2iFh-g==",
+    "CloudFront-Is-Tablet-Viewer": "false",
+    "X-Forwarded-Port": "443",
+    "CloudFront-Is-Mobile-Viewer": "false"
+  },
+  "params": {
+  },
+  "method": "POST",
+  "query": {
+  }
+}
