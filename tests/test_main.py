@@ -21,7 +21,8 @@ class TestMainFunction(unittest.TestCase):
             "method": "POST",        
             "body": {
                 "geohash": "test_hash",
-                "coordinates": "coordinates",
+                "lat": "lat",
+                "lng": "lng",
                 "message": "message in a bottle"
             }
         }
@@ -46,5 +47,6 @@ class TestMainFunction(unittest.TestCase):
         response = handler(event, None)
         assert response["status_code"] == "200"
         assert response["body"]["geothoughts"][0]["geohash"] == "test_hash"
-        assert response["body"]["geothoughts"][0]["coordinates"] == "coordinates"
+        assert response["body"]["geothoughts"][0]["lat"] == "lat"
+        assert response["body"]["geothoughts"][0]["lng"] == "lng"
         assert response["body"]["geothoughts"][0]["message"] == "message in a bottle"

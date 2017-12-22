@@ -5,9 +5,10 @@ class Geothoughts:
     def __init__(self, session):
         self.session = session
 
-    def add(self, geohash, coordinates, message):
+    def add(self, geohash, lat, lng, message):
         new_thought = Geothought(geohash=geohash,
-                                 coordinates=coordinates,
+                                 lat=lat,
+                                 lng=lng,
                                  message=message)
         self.session.add(new_thought)  
         self.session.commit()

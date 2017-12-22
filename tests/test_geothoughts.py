@@ -20,9 +20,9 @@ def setup_module():
 class TestGeothoughts(unittest.TestCase):
 
     def test_can_add_geothought(self):
-        geothoughts.add("geohash_1", "1234, 1234", "A test message")
-        geothoughts.add("geohash_2", "1234, 1234", "A test message")
-        geothoughts.add("geohash_1", "1234, 1234", "A test message")
+        geothoughts.add("geohash_1", 1234, 1234, "A test message")
+        geothoughts.add("geohash_2", 1234, 1234, "A test message")
+        geothoughts.add("geohash_1", 1234, 1234, "A test message")
 
     def test_get_all(self):
         thoughts = geothoughts.get_all()

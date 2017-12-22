@@ -68,7 +68,8 @@ def handler(event, context):
 
         try:
             geohash = event['body']['geohash']
-            coordinates = event['body']['coordinates']
+            lat = event['body']['lat']
+            lng = event['body']['lng']
             message = event['body']['message']
         except Exception as e:
             print "Error parsing request body: ", e
@@ -79,7 +80,7 @@ def handler(event, context):
             }
             return error_response
         try:
-            geothoughts.add(geohash, coordinates, message)
+            geothoughts.add(geohash, lat, lng, message)
         except Exception as e:
             print "Error parsing request body: ", e
             error_response = {

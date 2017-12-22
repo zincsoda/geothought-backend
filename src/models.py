@@ -8,8 +8,9 @@ class Geothought(Base):
     __tablename__ = 'geothoughts'
     id = Column(Integer, primary_key=True)
     geohash = Column(String)
-    coordinates = Column(String)
     message = Column(String)
+    lat = Column(Integer)
+    lng = Column(Integer)
     
     def as_dict(self):
        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
